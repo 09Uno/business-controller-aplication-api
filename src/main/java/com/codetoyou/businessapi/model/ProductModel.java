@@ -1,4 +1,4 @@
-package com.codetoyou.businessapi.rest.product.model;
+package com.codetoyou.businessapi.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity //indica que é uma entidade
 @Table(name = "products") //nome da tabela
-public class Product {
+public class ProductModel {
 
     
     @Id //indica que é uma chave primária
@@ -37,7 +37,7 @@ public class Product {
     @Column(name = "createdAt", updatable = false )
     private LocalDate createdAt;
 
-    public Product(Long id, String name, BigDecimal price, String descr, String sku, LocalDate createdAt) {
+    public ProductModel(Long id, String name, BigDecimal price, String descr, String sku, LocalDate createdAt) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -46,7 +46,7 @@ public class Product {
         this.createdAt = createdAt;
     } //construtor com todos os atributos
 
-    public Product(Long id, String name, BigDecimal price, String descr, String sku) {
+    public ProductModel(Long id, String name, BigDecimal price, String descr, String sku) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -54,14 +54,14 @@ public class Product {
         this.sku = sku;
     } //construtor sem o atributo createdAt
     
-    public Product(String name, BigDecimal price, String descr, String sku) {
+    public ProductModel(String name, BigDecimal price, String descr, String sku) {
         this.name = name;
         this.price = price;
         this.descr = descr;
         this.sku = sku;
     } //construtor sem o atributo id e createdAt
     
-    public Product() {
+    public ProductModel() {
         super();
     } //construtor vazio
 
@@ -124,9 +124,5 @@ public class Product {
     public String toString() {
         return "Product [id=" + id + ", name=" + name + ", price=" + price + ", descr=" + descr + ", sku=" + sku + "]";
     }
-
-    
-
-
 
 }

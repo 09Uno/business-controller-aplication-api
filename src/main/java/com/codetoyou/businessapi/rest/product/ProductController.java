@@ -1,7 +1,5 @@
 package com.codetoyou.businessapi.rest.product;
 
-import com.codetoyou.businessapi.rest.product.model.Product;
-import com.codetoyou.businessapi.rest.product.model.repository.ProductRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -16,6 +14,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.codetoyou.businessapi.model.ProductModel;
+import com.codetoyou.businessapi.model.repository.ProductRepository;
 
 
 //faz com que a classe seja um controlador REST
@@ -42,7 +43,7 @@ public class ProductController {
 
   @GetMapping("{id}") // busca o produto pelo id
   public ResponseEntity<ProductRequest> find(@PathVariable Long id) {
-    Optional<Product> productExist = productRepository.findById(id); // busca o produto pelo id
+    Optional<ProductModel> productExist = productRepository.findById(id); // busca o produto pelo id
     if (productExist.isPresent()) {
       return ResponseEntity.ok(ProductRequest.fromModel(productExist.get())); // retorna o produto caso exista
     }
@@ -53,7 +54,7 @@ public class ProductController {
 
   @PostMapping
   public ProductRequest save(@RequestBody ProductRequest productRequest) {
-    Product productEntity = productRequest.toModel(); // converte o objeto para o modelo do banco de dados
+    ProductModel productEntity = productRequest.toModel(); // converte o objeto para o modelo do banco de dados
 
     productRepository.save(productEntity); // salva no banco de dados
 
@@ -65,13 +66,13 @@ public class ProductController {
     @PathVariable Long id,
     @RequestBody ProductRequest productRequest
   ) {
-    Optional<Product> product = productRepository.findById(id); // busca o produto pelo id
+    Optional<ProductModel> product = productRepository.findById(id); // busca o produto pelo id
 
-    if (!product.isPresent()) {
+    if (!product.isEmpty()) {
       return ResponseEntity.notFound().build(); // retorna um erro caso o produto não exista
     }
 
-    Product productEntity = productRequest.toModel(); // converte o objeto para o modelo do banco de dados
+    ProductModel productEntity = productRequest.toModel(); // converte o objeto para o modelo do banco de dados
     productEntity.setId(id); // seta o id do produto
     productRepository.save(productEntity); // salva no banco de dados
 
@@ -80,7 +81,7 @@ public class ProductController {
 
   @DeleteMapping("{id}") // deleta o produto
   public ResponseEntity<Void> del(@PathVariable Long id) {
-    Optional<Product> product = productRepository.findById(id); // busca o produto pelo id
+    Optional<ProductModel> product = productRepository.findById(id); // busca o produto pelo id
 
     if (!product.isPresent()) {
       return ResponseEntity.notFound().build(); // retorna um erro caso o produto não exista

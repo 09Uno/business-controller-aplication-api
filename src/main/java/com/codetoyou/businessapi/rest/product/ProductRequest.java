@@ -1,6 +1,6 @@
 package com.codetoyou.businessapi.rest.product;
 
-import com.codetoyou.businessapi.rest.product.model.Product;
+import com.codetoyou.businessapi.model.ProductModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -51,21 +51,6 @@ public class ProductRequest {
     this.createdAt = createdAt;
   }
 
-  public Product toModel() {
-    return new Product(id, name, price, descr, sku, createdAt);
-  } //construtor com todos os atributos
-
-  public static ProductRequest fromModel(Product product) {
-    return new ProductRequest(
-      product.getId(),
-      product.getDescr(),
-      product.getName(),
-      product.getPrice(),
-      product.getSku(),
-      product.getCreatedAt()
-    );
-  } //construtor sem o atributo id e createdAt 
-  
   public String getDescr() {
     return descr;
   }
@@ -114,6 +99,23 @@ public class ProductRequest {
   public void setCreatedAt(LocalDate createdAt) {
     this.createdAt = createdAt;
   }
+
+
+  public ProductModel toModel() {
+    return new ProductModel(id, name, price, descr, sku, createdAt);
+  } //construtor com todos os atributos
+
+  public static ProductRequest fromModel(ProductModel product) {
+    return new ProductRequest(
+      product.getId(),
+      product.getDescr(),
+      product.getName(),
+      product.getPrice(),
+      product.getSku(),
+      product.getCreatedAt()
+    );
+  }
+
 
   @Override
   public String toString() {
