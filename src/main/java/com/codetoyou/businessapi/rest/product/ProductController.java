@@ -68,7 +68,7 @@ public class ProductController {
   ) {
     Optional<ProductModel> product = productRepository.findById(id); // busca o produto pelo id
 
-    if (!product.isEmpty()) {
+    if (product.isEmpty()) {
       return ResponseEntity.notFound().build(); // retorna um erro caso o produto não exista
     }
 
