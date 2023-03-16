@@ -34,7 +34,7 @@ public class ClientController {
       .collect(Collectors.toList());
   }
 
-  @GetMapping({ "id" })
+  @GetMapping("{id}")
   public ResponseEntity<ClientRequest> find(@PathVariable Long id) {
     Optional<ClientModel> clientExist = clientRepository.findById(id);
     if (clientExist.isEmpty()) {
@@ -55,13 +55,13 @@ public class ClientController {
     return ResponseEntity.ok(ClientRequest.fromModel(client));
   }
 
-  @PutMapping({ "id" })
+  @PutMapping("{id}")
   public ResponseEntity<Void> update(
     @PathVariable Long id,
     @RequestBody ClientRequest clientRequest
   ) {
     java.util.Optional<ClientModel> clientExist = clientRepository.findById(id);
-    if (!clientExist.isEmpty()) {
+    if (clientExist.isEmpty()) {
       return ResponseEntity.notFound().build();
     }
 
@@ -72,10 +72,10 @@ public class ClientController {
     return ResponseEntity.ok().build();
   }
 
-  @DeleteMapping({ "id" })
+  @DeleteMapping("{id}")
   public ResponseEntity<Void> del(@PathVariable Long id) {
     Optional<ClientModel> clientExist = clientRepository.findById(id);
-    if (clientExist.isPresent()) {
+    if (!clientExist.isPresent()) {
       return ResponseEntity.notFound().build();
     }
 

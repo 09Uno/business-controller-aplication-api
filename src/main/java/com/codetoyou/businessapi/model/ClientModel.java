@@ -2,11 +2,15 @@ package com.codetoyou.businessapi.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+
+import org.springframework.data.annotation.Persistent;
 
 @Table(name = "clients" )
 @Entity //indica que é uma entidade
@@ -16,15 +20,31 @@ public class ClientModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private Long id;
 
+    @Column(name = "birthdate" )
     private LocalDate birthDate;
+
+    @Column(name = "cpf" )
     private String cpf;
+
+    @Column(name = "name" )
     private String name;
+
+    @Column(name = "address")
     private String address;
+
+    @Column(name = "phone" )
     private String phone;
+
+    @Column(name = "email" )
     private String email;
+
+    @Column(name = "createdat", updatable = false )
     private LocalDate createdAt;
     
-    
+    @PrePersist //indica que o método será executado antes de persistir
+    public void prePersist() {
+        createdAt = LocalDate.now();
+    }
     
     public ClientModel() {
         super();
@@ -45,11 +65,11 @@ public class ClientModel {
         this.id = id;
         this.birthDate = birthDate;
         this.cpf = cpf;
+        this.createdAt = createdAt;
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.email = email;
-        this.createdAt = createdAt;
     }
 
     

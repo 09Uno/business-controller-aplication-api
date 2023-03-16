@@ -3,6 +3,7 @@ package com.codetoyou.businessapi.rest.client;
 import java.time.LocalDate;
 
 import com.codetoyou.businessapi.model.ClientModel;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 
@@ -10,12 +11,14 @@ public class ClientRequest {
     
 
     private Long id;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthDate;
     private String name;
     private String cpf;
     private String address;
     private String phone;
     private String email;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate createdAt;
 
     public ClientRequest() {
@@ -100,7 +103,7 @@ public class ClientRequest {
 
 
     public ClientModel toModel() {
-        return new ClientModel(id, birthDate, name, cpf, address, phone, email, createdAt);
+        return new ClientModel(id, birthDate, cpf, name, address, phone, email, createdAt);
     } 
     
     public static ClientRequest fromModel(ClientModel clientModel) {
