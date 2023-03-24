@@ -18,7 +18,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "sell")
+@Table(name = "sells")
 public class SellModel {
 
     @Id
@@ -31,6 +31,7 @@ public class SellModel {
 
     
     @Enumerated(EnumType.STRING)
+    @Column(name = "payment_method")
     private PaymentMethod paymentMethod;
 
     @OneToMany(mappedBy = "sell")

@@ -2,6 +2,7 @@ package com.codetoyou.businessapi.model;
 
 import java.time.LocalDate;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.Persistent;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 @Table(name = "clients" )
 @Entity //indica que é uma entidade
@@ -21,6 +23,7 @@ public class ClientModel {
     private Long id;
 
     @Column(name = "birthdate" )
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthDate;
 
     @Column(name = "cpf" )
@@ -39,6 +42,7 @@ public class ClientModel {
     private String email;
 
     @Column(name = "createdat", updatable = false )
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate createdAt;
     
     @PrePersist //indica que o método será executado antes de persistir

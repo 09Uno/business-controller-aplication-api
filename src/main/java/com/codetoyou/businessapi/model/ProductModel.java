@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 
 @Entity //indica que é uma entidade
@@ -35,6 +37,7 @@ public class ProductModel {
     private String sku;
     
     @Column(name = "createdAt", updatable = false )
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate createdAt;
 
     public ProductModel(Long id, String name, BigDecimal price, String descr, String sku, LocalDate createdAt) {

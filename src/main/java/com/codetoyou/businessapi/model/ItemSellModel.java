@@ -1,7 +1,5 @@
 package com.codetoyou.businessapi.model;
 
-import java.math.BigDecimal;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "item_sell")
+@Table(name = "itemsell")
 public class ItemSellModel {
 
     @Id
@@ -29,7 +27,8 @@ public class ItemSellModel {
 
     @Column(name = "quantity")
     private Integer quantity;
-    private BigDecimal total;
+
+   
 
     
     public Long getId() {
@@ -50,13 +49,7 @@ public class ItemSellModel {
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
-    public BigDecimal getTotal() {
-        return total;
-    }
-    public void setTotal(BigDecimal total) {
-        this.total = total;
-    }
-    
+   
     public ProductModel getProduct() {
         return product;
     }
@@ -65,9 +58,9 @@ public class ItemSellModel {
     }
     @Override
     public String toString() {
-        return "ItemSellModel [id=" + id + ", sell=" + sell + ", product=" + product + ", quantity=" + quantity
-                + ", total=" + total + "]";
+        return "ItemSellModel [id=" + id + ", sell=" + sell + ", product=" + product + ", quantity=" + quantity + "]";
     }
+    
     
     
 
